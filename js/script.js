@@ -68,9 +68,12 @@
     optTitleSelector = '.post-title',
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
-    optTagLinkSelector = '.post-tags .list a';
+    optTagLinkSelector = '.post-tags .list a',
+    optArticleAuthorSelector = '.post-author';
 
-  function generateTitleLinks() {
+  function generateTitleLinks(customSelector = '') {
+
+    //console.log('selector: ', customSelector);
 
     // const clickedElement = this;
     // console.log(generateTitleLinks);
@@ -79,6 +82,7 @@
 
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML = '';
+
 			
     //nd all the articles and save them to variable: articles */
 
@@ -86,7 +90,9 @@
 
     /* for each article */
 
-    const articles = document.querySelectorAll(optArticleSelector);
+    const articles = document.querySelectorAll(optArticleSelector + customSelector);
+
+    console.log('custom selector: ', optArticleSelector + customSelector);
 
     for(let article of articles) {
 
@@ -311,4 +317,57 @@
 
   addClickListenerToTags();
 
+  function generateAuthors() {
+
+    /*find all articles */
+
+    const articles = document.querySelectorAll(optArticleSelector);
+
+    /* START LOOP: for every article */
+
+    for(let article of articles) {
+
+
+
+      /* find authors wrapper */
+
+      const authorsWrapper = article.querySelector(optArticleAuthorSelector);
+
+      console.log('Author Wrapper: ', authorsWrapper);
+
+      /* make html variable with empty string */
+
+      let html = '';
+
+      /* get authors form 'data-authors' attribute */
+
+      const articleAuthors = article.getAttribute('data-author');
+
+      console.log('Article Authors: ', articleAuthors);
+
+      /* generate HTML of the link */
+
+      const linkHTML = '<a href="#' + articleAuthors + '">' + articleAuthors + '</a>';
+
+      console.log('Link HTML: ', linkHTML);
+
+      /* add generated code to html variable */
+
+      html = html + linkHTML;
+
+      console.log('Add html: ', html);
+
+      /* insert HTML of links into the authors wrapper */
+
+      authorsWrapper.insertAdjacentHTML('beforeend', html);
+
+      console.log('Insert: ', authorsWrapper);
+
+      /* END LOOP: for every article */
+
+    }
+
+  }
+
+  generateAuthors();
 }
