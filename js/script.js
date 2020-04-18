@@ -339,7 +339,7 @@
 
       /* generate HTML of the link */
 
-      const linkHTML = '<a href="#' + articleAuthors + '">' + articleAuthors + '</a>';
+      const linkHTML = '<a href="#author-' + articleAuthors + '">' + articleAuthors + '</a>';
 
       //console.log('Link HTML: ', linkHTML);
 
